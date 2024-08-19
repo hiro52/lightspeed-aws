@@ -32,7 +32,7 @@
         instance_type: t3.small
         wait: "{{ my_instance.wait }}"
 #        tags: "{{ _tags_ }}"
-      delegate_to: localhost
+#      delegate_to: localhost
       register: ec2_instance
     
     - name: Create var from public_ip_address with retry
