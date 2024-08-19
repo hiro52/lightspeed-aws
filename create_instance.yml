@@ -1,6 +1,6 @@
 ---
 - name: EC2 Cloud Operations
-  hosts: localhost
+  hosts: all
   conection: local
   gather_facts: false
 
