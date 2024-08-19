@@ -25,7 +25,7 @@
       # Content suggestion provided by Ansible Lightspeed
       amazon.aws.ec2_instance:
         name: "{{ my_instance.name }}"
-        key_name: "{{ aac }}"
+        key_name: aac
         image_id: "{{ my_instance.image_id }}"
         network: "{{ my_instance.network }}"
         security_group: "{{ my_instance.security_group }}"
