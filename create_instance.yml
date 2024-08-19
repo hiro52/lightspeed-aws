@@ -1,7 +1,7 @@
 ---
 - name: EC2 Cloud Operations
-  hosts: all
-#  conection: local
+  hosts: localhost
+  conection: local
   gather_facts: false
 
   module_defaults:
