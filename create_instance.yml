@@ -15,7 +15,8 @@
       image_id: ami-016eb5d644c333ccb # RHEL 9 us-east-1
       network:
         assign_public_ip: true
-      tags:
+      subnet_id: subnet-04431049f14b80825 # VPC Subnet
+#      tags:
 #        function: demo-lightspeed
       security_group: default
       wait: true
@@ -35,15 +36,15 @@
         wait: "{{ my_instance.wait }}"
 #        tags: "{{ _tags_ }}"
 #      delegate_to: localhost
-#      register: ec2_instance
+      register: ec2_instance
     
-#    - name: Create var from public_ip_address with retry
-#      ansible.builtin.set_fact:
-#        public_ip_address: "{{ ec2_instance.instances[0].public_ip_address }}"
-#      retries: 10
-#      delay: 10
-#      until: public_ip_address is defined
-#    
-#    - name: Print it out
-#      ansible.builtin.debug:
-#        msg: "{{ public_ip_address }}"    
+    - name: Create var from public_ip_address with retry
+      ansible.builtin.set_fact:
+        public_ip_address: "{{ ec2_instance.instances[0].public_ip_address }}"
+      retries: 10
+      delay: 10
+      until: public_ip_address is defined
+    
+    - name: Print it out
+      ansible.builtin.debug:
+        msg: "{{ public_ip_address }}"    
