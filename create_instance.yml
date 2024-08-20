@@ -27,7 +27,7 @@
         access_key: "{{ AWS_ACCESS_KEY_ID }}"
         secret_key: "{{ AWS_SECRET_ACCESS_KEY }}"
         name: "{{ my_instance.name }}"
-        key_name: aac
+        key_name: "aac"
         image_id: "{{ my_instance.image_id }}"
         network: "{{ my_instance.network }}"
         security_group: "{{ my_instance.security_group }}"
