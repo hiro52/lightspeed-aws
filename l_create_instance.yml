@@ -30,10 +30,10 @@
         filters:
           tag:Name: "{{ my_instance.subnet_id }}"
 
-    - name: print all subnet_ids
+    - name: print subnet_info
       # Content suggestion provided by Ansible Lightspeed
       ansible.builtin.debug:
-        msg: "{{ subnet_info.subnets | map(attribute='id') | list }}"
+        var: subnet_info
     
     - name: Create vpc_subnet_id var
       ansible.builtin.set_fact:
