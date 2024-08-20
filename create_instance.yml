@@ -22,10 +22,9 @@
 
   tasks:
     - name: Create t3.small instance using my_instance var
-      # Content suggestion provided by Ansible Lightspeed
       amazon.aws.ec2_instance:
-        access_key: "{{ AWS_ACCESS_KEY_ID }}"
-        secret_key: "{{ AWS_SECRET_ACCESS_KEY }}"
+#        access_key: "{{ AWS_ACCESS_KEY_ID }}"
+#        secret_key: "{{ AWS_SECRET_ACCESS_KEY }}"
         name: "{{ my_instance.name }}"
         key_name: "aac"
         image_id: "{{ my_instance.image_id }}"
@@ -35,17 +34,15 @@
         wait: "{{ my_instance.wait }}"
 #        tags: "{{ _tags_ }}"
 #      delegate_to: localhost
-      register: ec2_instance
+#      register: ec2_instance
     
-    - name: Create var from public_ip_address with retry
-      # Content suggestion provided by Ansible Lightspeed
-      ansible.builtin.set_fact:
-        public_ip_address: "{{ ec2_instance.instances[0].public_ip_address }}"
-      retries: 10
-      delay: 10
-      until: public_ip_address is defined
-    
-    - name: Print it out
-      # Content suggestion provided by Ansible Lightspeed
-      ansible.builtin.debug:
-        msg: "{{ public_ip_address }}"    
+#    - name: Create var from public_ip_address with retry
+#      ansible.builtin.set_fact:
+#        public_ip_address: "{{ ec2_instance.instances[0].public_ip_address }}"
+#      retries: 10
+#      delay: 10
+#      until: public_ip_address is defined
+#    
+#    - name: Print it out
+#      ansible.builtin.debug:
+#        msg: "{{ public_ip_address }}"    
