@@ -1,5 +1,5 @@
 ---
-- name: EC2 Cloud Operations
+- name: EC2 Create Instance
   hosts: localhost
   conection: local
   gather_facts: false
