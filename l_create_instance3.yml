@@ -8,7 +8,7 @@
       amazon.aws.ec2_instance:
         key_name: aac
         instance_type: t2.micro
-        image: ami-016eb5d644c333ccb
+        image_id: ami-016eb5d644c333ccb
         region: us-east-1
         vpc_subnet_id: subnet-04431049f14b80825
         assign_public_ip: true
@@ -20,3 +20,14 @@
     - name: Output public and private IP addresses
       ansible.builtin.debug:
         msg: "Public IP: {{ ec2.instances[0].public_ip }} | Private IP: {{ ec2.instances[0].private_ip }}"
+
+    - name: Create EC2 instance
+      amazon.aws.ec2_instance:
+        key_name: "{{ _key_name_ }}"
+        instance_type: t2.micro
+        image: "{{ _image_ }}"
+        region: us-east-1
+        vpc_subnet_id: subnet-04431049f14b80825
+        wait: true
+      register: ec2
+
