@@ -26,8 +26,8 @@
     - name: Get subnet-lightspeed info
       register: subnet_info
       amazon.aws.ec2_vpc_subnet_info:
-        filters:
-          tag:Name: "{{ my_instance.subnet_id }}"
+#        filters:
+#          tag:Name: "{{ my_instance.subnet_id }}"
 
     - name: Create vpc_subnet_id var
       ansible.builtin.set_fact:
