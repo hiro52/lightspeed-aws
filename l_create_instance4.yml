@@ -2,7 +2,7 @@
 - name: Create a t2.micro EC2 instance named "Lightspeed-instance" using "amazon.aws.ec2_instance" collections and using image-id ami-016eb5d644c333ccb in region
     east-us-1 using subnet-04431049f14b80825 with a public ip and with key name aac and with security group default and a tag "env:develop", then output the public
     ip and the private ip address through a debug message.
-  hosts: localhost
+  hosts: all
   connection: local
   gather_facts: false
   tasks:
