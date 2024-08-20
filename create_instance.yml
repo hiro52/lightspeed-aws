@@ -1,7 +1,7 @@
 ---
 - name: EC2 Create Instance
-  hosts: localhost
-  conection: local
+  hosts: all
+#  conection: local
   gather_facts: false
 
   module_defaults:
