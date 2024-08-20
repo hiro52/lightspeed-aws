@@ -24,6 +24,8 @@
     - name: Create t3.small instance using my_instance var
       # Content suggestion provided by Ansible Lightspeed
       amazon.aws.ec2_instance:
+        access_key: "{{ AWS_ACCESS_KEY_ID }}"
+        secret_key: "{{ AWS_SECRET_ACCESS_KEY }}"
         name: "{{ my_instance.name }}"
         key_name: aac
         image_id: "{{ my_instance.image_id }}"
