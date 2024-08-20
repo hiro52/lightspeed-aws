@@ -3,7 +3,7 @@
     east-us-1 using subnet-04431049f14b80825 with a public ip and with key name aac and with security group default and a tag "env:develop", then output the public
     ip and the private ip address through a debug message.
   hosts: all
-  connection: local
+#  connection: local
   gather_facts: false
   tasks:
     - name: Create EC2 instance
