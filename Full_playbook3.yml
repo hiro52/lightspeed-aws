@@ -1,0 +1,42 @@
+---
+- name: Create EC2 instance
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  vars:
+    ec2_name: Lightspeed-instance
+    ec2_region: us-east-1
+    ec2_image: ami-016eb5d644c333ccb
+    ec2_instance_type: t2.micro
+    ec2_keypair: aac
+    ec2_security_group: default
+    ec2_vpc_subnet_id: "{{ vpc_subnet_id }}"
+    ec2_assign_public_ip: true
+    ec2_tag_env: develop
+  tasks:
+    - name: Get subnet-lightspeed info
+      ec2_vpc_subnet_facts:
+        region: "{{ ec2_region }}"
+        filters:
+          tag:Name: subnet-lightspeed
+      register: subnet_info
+    - name: Set vpc_subnet_id variable
+      ansible.builtin.set_fact:
+        vpc_subnet_id: "{{ subnet_info.subnets[0].id }}"
+    - name: Create EC2 instance
+      amazon.aws.ec2_instance:
+        name: "{{ ec2_name }}"
+        region: "{{ ec2_region }}"
+        image_id: "{{ ec2_image }}"
+        instance_type: "{{ ec2_instance_type }}"
+        key_name: "{{ ec2_keypair }}"
+        security_groups: "{{ ec2_security_group }}"
+        vpc_subnet_id: "{{ vpc_subnet_id }}"
+        network:
+          assign_public_ip: true
+        tags:
+          env: "{{ ec2_tag_env }}"
+      register: ec2
+    - name: Output public_ip_address and private_ip_address
+      ansible.builtin.debug:
+        msg: "Public IP: {{ ec2.instances[0].public_ip_address }} | Private IP: {{ ec2.instances[0].private_ip_address }}"
