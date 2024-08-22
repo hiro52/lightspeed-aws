@@ -22,7 +22,7 @@
           vpc-id: "{{ ec2_vpc_id }}"
  
     - name: Create EC2 instance with public_ip_address
-      amazon.aws.ec2.instance:
+      amazon.aws.ec2_instance:
         key_name: aac
         region: "{{ ec2_region }}"
         image: "{{ ec2_image }}"
