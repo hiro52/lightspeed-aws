@@ -24,4 +24,4 @@
       register: ec2
     - name: Output public IP and private IP
       ansible.builtin.debug:
-        msg: "Public IP: {{ ec2.instances[0].public_ip }} | Private IP: {{ ec2.instances[0].private_ip }}"
+        msg: "Public IP: {{ ec2.instances[0].public_ip_address }} | Private IP: {{ ec2.instances[0].private_ip_address }}"
