@@ -15,12 +15,12 @@
     ec2_tag_env: develop
   tasks:
     - name: Get aws vpc subnet info
-      register: vpc_subnet_info
+      register: vpc_subSnet_info
       amazon.aws.ec2_vpc_subnet_info:
         region: "{{ ec2_region }}"
-        filters:
-          vpc-id: "{{ ec2_vpc_id }}"
- 
+#        filters:
+#          vpc-id: "{{ ec2_vpc_id }}"
+
     - name: Create EC2 instance with public_ip_address
       amazon.aws.ec2_instance:
         key_name: aac
