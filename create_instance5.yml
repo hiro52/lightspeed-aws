@@ -1,0 +1,48 @@
+---
+- name: EC2 Create Instance
+  hosts: all
+#  conection: local
+  gather_facts: false
+
+  module_defaults:
+    group/aws:
+      region: us-east-1
+
+  vars:
+    my_instance:
+      name: instance-lightspeed-01
+      key_name: aac
+      image_id: ami-016eb5d644c333ccb # RHEL 9 us-east-1
+      network:
+        assign_public_ip: true
+      subnet_id: subnet-04431049f14b80825 # VPC Subnet
+#      tags:
+#        function: demo-lightspeed
+      security_group: default
+      wait: true
+
+  tasks:
+    - name: Create t3.small instance using my_instance var
+      amazon.aws.ec2_instance:
+        name: "{{ my_instance.name }}"
+        key_name: "aac"
+        image_id: "{{ my_instance.image_id }}"
+        network: "{{ my_instance.network }}"
+        security_group: "{{ my_instance.security_group }}"
+        instance_type: t3.small
+        subnet_id: subnet-04431049f14b80825
+        wait: "{{ my_instance.wait }}"
+#        tags: "{{ _tags_ }}"
+#      delegate_to: localhost
+      register: ec2_instance
+    
+    - name: Create var from public_ip_address with retry
+      ansible.builtin.set_fact:
+        public_ip_address: "{{ ec2_instance.instances[0].public_ip_address }}"
+      retries: 10
+      delay: 10
+      until: public_ip_address is defined
+    
+    - name: Print it out
+      ansible.builtin.debug:
+        msg: "{{ public_ip_address }}"    
