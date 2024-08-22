@@ -1,0 +1,28 @@
+---
+- name: Create a t2.micro EC2 instance named "Lightspeed-instance" using "amazon.aws.ec2_instance" collections and using image-id ami-016eb5d644c333ccb in region
+    us-east-1 using subnet-04431049f14b80825 with a public_ip_address and with key name aac and with security group default and a tag "env:develop", then output the
+    public_ip_address and the private_ip_address through a debug message.
+  hosts: localhost
+#  connection: local
+  gather_facts: false
+  collections:
+    - amazon.aws
+  tasks:
+    - name: Create EC2 instance
+      register: ec2
+      amazon.aws.ec2_instance:
+        name: Lightspeed-instance
+        image_id: ami-016eb5d644c333ccb
+        region: us-east-1
+        instance_type: t2.micro
+        vpc_subnet_id: subnet-04431049f14b80825
+        key_name: aac
+        network:
+          assign_public_ip: true
+        security_groups:
+          - default
+        tags:
+          env: develop
+    - name: Output public_ip_address and private_ip_address
+      ansible.builtin.debug:
+        msg: "Public IP: {{ ec2.instances[0].public_ip_address }} Private IP: {{ ec2.instances[0].private_ip_address }}"
