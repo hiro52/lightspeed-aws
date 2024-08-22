@@ -23,6 +23,7 @@
           - default
         tags:
           env: develop
+        wait: true
     - name: Output public_ip_address and private_ip_address
       ansible.builtin.debug:
         msg: "Public IP: {{ ec2.instances[0].public_ip_address }} Private IP: {{ ec2.instances[0].private_ip_address }}"
