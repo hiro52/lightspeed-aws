@@ -17,8 +17,6 @@
     - name: Get subnet-lightspeed info
       amazon.aws.ec2_vpc_subnet_info:
         region: "{{ ec2_region }}"
-        filters:
-          tag:Name: subnet-lightspeed
       register: subnet_info
     - name: Set vpc_subnet_id variable
       ansible.builtin.set_fact:
