@@ -9,7 +9,6 @@
     - amazon.aws
   tasks:
     - name: Create EC2 instance
-      register: ec2
       amazon.aws.ec2_instance:
         name: Lightspeed-instance
         image_id: ami-016eb5d644c333ccb
@@ -24,6 +23,7 @@
         tags:
           env: develop
         wait: true
+      register: ec2
     - name: Output public_ip_address and private_ip_address
       ansible.builtin.debug:
         msg: "Public IP: {{ ec2.instances[0].public_ip_address }} Private IP: {{ ec2.instances[0].private_ip_address }}"
