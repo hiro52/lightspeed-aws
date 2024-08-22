@@ -25,7 +25,7 @@
       amazon.aws.ec2_instance:
         region: "{{ ec2_region }}"
         key_name: aac
-        image: "{{ _image_ }}"
+        image: "{{ ec2_image }}"
         instance_type: "{{ ec2_instance_type }}"
         vpc_subnet_id: "{{ vpc_subnet_info.subnets[0].id }}"
         security_group: "{{ ec2_security_group }}"
