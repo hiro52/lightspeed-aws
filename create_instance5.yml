@@ -4,9 +4,9 @@
 #  conection: local
   gather_facts: false
 
-  module_defaults:
-    group/aws:
-      region: us-east-1
+#  module_defaults:
+#    group/aws:
+#      region: us-east-1
 
 #  vars:
 #    my_instance:
@@ -33,6 +33,7 @@
         instance_type: t3.small
         subnet_id: subnet-04431049f14b80825
         wait: true
+        region: us-east-1
       register: ec2_instance
     
 #    - name: Create var from public_ip_address with retry
