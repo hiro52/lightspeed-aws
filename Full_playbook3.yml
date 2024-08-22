@@ -15,7 +15,7 @@
     ec2_tag_env: develop
   tasks:
     - name: Get subnet-lightspeed info
-      ec2_vpc_subnet_facts:
+      amazon.aws.ec2_vpc_subnet_info:
         region: "{{ ec2_region }}"
         filters:
           tag:Name: subnet-lightspeed
