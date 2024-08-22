@@ -21,20 +21,19 @@
 #        filters:
 #          vpc-id: "{{ ec2_vpc_id }}"
 
-    - name: Create EC2 instance with public_ip_address using amazon.aws.ec2_instance module
+    - name: Create EC2 instance with public_ip_address using image_id and amazon.aws.ec2_instance module
       amazon.aws.ec2_instance:
         region: "{{ ec2_region }}"
-        key_name: aac
-        image: "{{ ec2_image }}"
+        image_id: "{{ ec2_image }}"
         instance_type: "{{ ec2_instance_type }}"
-        vpc_subnet_id: "{{ vpc_subnet_info.subnets[0].id }}"
+        key_name: aac
         security_group: "{{ ec2_security_group }}"
-        network:
-          assign_public_ip: true
+        vpc_subnet_id: "{{ ec2_vpc_subnet_id }}"
+        tags:
+          Name: "{{ ec2_name }}"
+          Env: "{{ ec2_tag_env }}"
         wait: true
-        wait_timeout: 600
       register: ec2_instance
-
 
     - name: Output public_ip_address and private_ip_address
       ansible.builtin.debug:
