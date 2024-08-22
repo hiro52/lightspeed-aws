@@ -15,30 +15,32 @@
     ec2_tag_env: develop
   tasks:
     - name: Get aws vpc subnet info
+      register: vpc_subnet_info
       amazon.aws.ec2_vpc_subnet_info:
         region: "{{ ec2_region }}"
         filters:
           vpc-id: "{{ ec2_vpc_id }}"
-      register: vpc_subnet_info
-
+ 
     - name: Create EC2 instance with public_ip_address
-      amazon.aws.ec2:
+      amazon.aws.ec2.instance:
         key_name: aac
         region: "{{ ec2_region }}"
         image: "{{ ec2_image }}"
         instance_type: "{{ ec2_instance_type }}"
-        vpc_subnet_id: "{{ vpc_subnet_info.subnets[0].id }}"
+        vpc_subnet_id: "{{ ec2_vpc_subnet_id }}"
         assign_public_ip: "{{ ec2_assign_public_ip }}"
         group: "{{ ec2_security_group }}"
         instance_tags:
           Name: "{{ ec2_name }}"
-          Env: "{{ ec2_tag_env }}"
+          env: "{{ ec2_tag_env }}"
         wait: true
+        wait_timeout: 600
       register: ec2
-
 
     - name: Output public_ip_address and private_ip_address
       ansible.builtin.debug:
         msg:
           - public_ip_address: "{{ ec2.instances[0].public_ip_address }}"
           - private_ip_address: "{{ ec2.instances[0].private_ip_address }}"
+
+ 
