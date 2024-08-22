@@ -36,13 +36,13 @@
         region: us-east-1
       register: ec2_instance
     
-#    - name: Create var from public_ip_address with retry
-#      ansible.builtin.set_fact:
-#        public_ip_address: "{{ ec2_instance.instances[0].public_ip_address }}"
-#      retries: 10
-#      delay: 10
-#      until: public_ip_address is defined
+    - name: Create var from public_ip_address with retry
+      ansible.builtin.set_fact:
+        public_ip_address: "{{ ec2_instance.instances[0].public_ip_address }}"
+      retries: 10
+      delay: 10
+      until: public_ip_address is defined
     
-#    - name: Print it out
-#      ansible.builtin.debug:
-#        msg: "{{ public_ip_address }}"    
+    - name: Print it out
+      ansible.builtin.debug:
+        msg: "{{ public_ip_address }}"    
