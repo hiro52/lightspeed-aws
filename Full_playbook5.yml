@@ -35,7 +35,8 @@
           Name: "{{ ec2_name }}"
           Env: "{{ ec2_tag_env }}"
         wait: true
-        assign_public_ip: true
+        network:
+          assign_public_ip: true
       register: ec2_instance
 
     - name: Output public_ip_address and private_ip_address
