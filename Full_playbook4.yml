@@ -28,7 +28,7 @@
         instance_type: "{{ ec2_instance_type }}"
         key_name: aac
         security_group: "{{ ec2_security_group }}"
-        vpc_subnet_id: "{{ ec2_vpc_subnet_info }}"
+        vpc_subnet_id: "{{ vpc_subnet_id }}"
         tags:
           Name: "{{ ec2_name }}"
           Env: "{{ ec2_tag_env }}"
