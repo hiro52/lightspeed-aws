@@ -23,11 +23,11 @@
       ansible.builtin.set_fact:
         vpc_subnet_id: "{{ ec2_vpc_subnet_info.subnets[0].id }}"
 
-    - name: Create EC2 instance
+    - name: Create EC2 instance 
       amazon.aws.ec2_instance:
         key_name: "{{ ec2_keypair }}"
         instance_type: "{{ ec2_instance_type }}"
-        image: "{{ ec2_image }}"
+        image_id: "{{ ec2_image }}"
         region: "{{ ec2_region }}"
         vpc_subnet_id: "{{ vpc_subnet_id }}"
         group: "{{ ec2_security_group }}"
