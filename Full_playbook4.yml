@@ -15,7 +15,7 @@
     ec2_tag_env: develop
   tasks:
     - name: Get aws vpc subnet info
-      register: vpc_subnet_info
+      register: vpc_subnet_id
       amazon.aws.ec2_vpc_subnet_info:
         region: "{{ ec2_region }}"
 #        filters:
@@ -28,7 +28,7 @@
         instance_type: "{{ ec2_instance_type }}"
         key_name: aac
         security_group: "{{ ec2_security_group }}"
-        vpc_subnet_id: "{{ ec2_vpc_subnet_id }}"
+        vpc_subnet_id: "{{ ec2_vpc_subnet_info }}"
         tags:
           Name: "{{ ec2_name }}"
           Env: "{{ ec2_tag_env }}"
